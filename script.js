@@ -3,7 +3,9 @@ async function getNews(category = 'general') {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const res = await fetch(`/api/news?category=${category}`);
+    // Use the full URL for the deployed version
+    const apiUrl = 'https://news-website-inhl.onrender.com/api/news';
+    const res = await fetch(`${apiUrl}?category=${category}`);
     const data = await res.json();
 
     if (!data.articles || !Array.isArray(data.articles)) {
