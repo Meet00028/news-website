@@ -5,21 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>News Now</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header>
-    <h1>📰 News Now</h1>
-    <nav>
-      <button onclick="getNews('technology')">Tech</button>
-      <button onclick="getNews('business')">Business</button>
-      <button onclick="getNews('sports')">Sports</button>
-      <button onclick="getNews('health')">Health</button>
-    </nav>
+    <div class="header-content">
+      <h1><i class="fas fa-newspaper"></i> News Now</h1>
+      <nav>
+        <button onclick="getNews('technology')"><i class="fas fa-microchip"></i> Tech</button>
+        <button onclick="getNews('business')"><i class="fas fa-chart-line"></i> Business</button>
+        <button onclick="getNews('sports')"><i class="fas fa-running"></i> Sports</button>
+        <button onclick="getNews('health')"><i class="fas fa-heartbeat"></i> Health</button>
+        <button onclick="getNews('entertainment')"><i class="fas fa-film"></i> Entertainment</button>
+        <button onclick="getNews('science')"><i class="fas fa-flask"></i> Science</button>
+      </nav>
+    </div>
   </header>
 
   <main id="news-container">
-
+    <div class="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading news...</p>
+    </div>
   </main>
+
+  <footer>
+    <p>© 2024 News Now | Powered by NewsAPI</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

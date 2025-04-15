@@ -1,6 +1,11 @@
 async function getNews(category = 'general') {
   const newsContainer = document.getElementById('news-container');
-  newsContainer.innerHTML = '<p>Loading...</p>';
+  newsContainer.innerHTML = `
+    <div class="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading news...</p>
+    </div>
+  `;
 
   try {
     // Use the full URL for the deployed version
@@ -14,7 +19,12 @@ async function getNews(category = 'general') {
 
     displayNews(data.articles);
   } catch (err) {
-    newsContainer.innerHTML = `<p style="color: red;">❌ ${err.message}</p>`;
+    newsContainer.innerHTML = `
+      <div class="error">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>❌ ${err.message}</p>
+      </div>
+    `;
     console.error(err);
   }
 }
@@ -24,7 +34,12 @@ function displayNews(articles) {
   newsContainer.innerHTML = ''; // Clear old articles
 
   if (articles.length === 0) {
-    newsContainer.innerHTML = '<p>No news found for this category.</p>';
+    newsContainer.innerHTML = `
+      <div class="no-news">
+        <i class="fas fa-newspaper"></i>
+        <p>No news found for this category.</p>
+      </div>
+    `;
     return;
   }
 
@@ -32,15 +47,23 @@ function displayNews(articles) {
     const imageUrl = article.urlToImage || 'https://via.placeholder.com/400x200?text=No+Image';
     const description = article.description || 'No description available.';
     const title = article.title || 'Untitled';
+    const date = new Date(article.publishedAt).toLocaleDateString();
 
     const articleElement = document.createElement('div');
     articleElement.classList.add('article');
 
     articleElement.innerHTML = `
       <img src="${imageUrl}" alt="${title}" class="news-img" />
-      <h3>${title}</h3>
-      <p>${description}</p>
-      <a href="${article.url}" target="_blank">Read More</a>
+      <div class="article-content">
+        <h3>${title}</h3>
+        <p>${description}</p>
+        <div class="article-footer">
+          <span class="date"><i class="far fa-calendar"></i> ${date}</span>
+          <a href="${article.url}" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-external-link-alt"></i> Read More
+          </a>
+        </div>
+      </div>
     `;
 
     newsContainer.appendChild(articleElement);
