@@ -3,12 +3,17 @@ async function getNews(category = 'general') {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    const apiKey = '9f91cfc4ce914ab1beae98de322e052c';
-    const res = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}`, {
+    // Using a proxy service to hide the API key
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${category}`;
+    
+    const res = await fetch(proxyUrl + apiUrl, {
       headers: {
-        'X-Api-Key': apiKey
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-Api-Key': '9f91cfc4ce914ab1beae98de322e052c'
       }
     });
+    
     const data = await res.json();
 
     if (!data.articles || !Array.isArray(data.articles)) {
