@@ -3,16 +3,7 @@ async function getNews(category = 'general') {
   newsContainer.innerHTML = '<p>Loading...</p>';
 
   try {
-    // Using a different CORS proxy service
-    const proxyUrl = 'https://api.allorigins.win/raw?url=';
-    const apiUrl = encodeURIComponent(`https://newsapi.org/v2/top-headlines?country=us&category=${category}`);
-    
-    const res = await fetch(proxyUrl + apiUrl, {
-      headers: {
-        'X-Api-Key': '9f91cfc4ce914ab1beae98de322e052c'
-      }
-    });
-    
+    const res = await fetch(`/api/news?category=${category}`);
     const data = await res.json();
 
     if (!data.articles || !Array.isArray(data.articles)) {
