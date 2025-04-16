@@ -142,3 +142,47 @@ function showError(message) {
 // Initialize with general news
 getNews();
 
+// Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Get modal elements
+  const aboutModal = document.getElementById('about-modal');
+  const privacyModal = document.getElementById('privacy-modal');
+  
+  // Get buttons that open the modals
+  const aboutBtn = document.querySelector('a[href="#about"]');
+  const privacyBtn = document.querySelector('a[href="#privacy"]');
+  
+  // Get close buttons
+  const closeButtons = document.querySelectorAll('.close-modal');
+  
+  // Open About modal
+  aboutBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    aboutModal.style.display = 'block';
+  });
+  
+  // Open Privacy modal
+  privacyBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    privacyModal.style.display = 'block';
+  });
+  
+  // Close modals when clicking close button
+  closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      aboutModal.style.display = 'none';
+      privacyModal.style.display = 'none';
+    });
+  });
+  
+  // Close modals when clicking outside
+  window.addEventListener('click', function(e) {
+    if (e.target === aboutModal) {
+      aboutModal.style.display = 'none';
+    }
+    if (e.target === privacyModal) {
+      privacyModal.style.display = 'none';
+    }
+  });
+});
+

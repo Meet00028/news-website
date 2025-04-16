@@ -447,34 +447,53 @@ footer {
   }
 }
 
-/* Info Sections */
-.info-section {
-  max-width: 800px;
-  margin: 2rem auto;
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: var(--card-background);
+  margin: 5% auto;
   padding: 2rem;
-  background: var(--card-background);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease;
 }
 
-.info-section h2 {
+.close-modal {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
   color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  font-family: 'Playfair Display', serif;
 }
 
-.info-section p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.info-section ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.info-section li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
