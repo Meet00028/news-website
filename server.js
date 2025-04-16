@@ -16,7 +16,7 @@ app.use(express.json());
 app.get('/api/news', async (req, res) => {
   try {
     const { category, q: searchTerm } = req.query;
-    const apiKey = process.env.NEWS_API_KEY;
+    const apiKey = process.env.NEWS_API_KEY || '9f91cfc4ce914ab1beae98de322e052c';
     
     let url = 'https://newsapi.org/v2/top-headlines?country=us';
     
@@ -29,6 +29,8 @@ app.get('/api/news', async (req, res) => {
     }
     
     url += `&apiKey=${apiKey}`;
+    
+    console.log('Fetching news from:', url); // Debug log
     
     const response = await fetch(url);
     const data = await response.json();
@@ -57,4 +59,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Using API Key: ${process.env.NEWS_API_KEY ? 'From Environment' : 'Fallback Key'}`);
 }); 
