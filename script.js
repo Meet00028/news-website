@@ -1,6 +1,5 @@
 // API Configuration
-const API_KEY = 'YOUR_API_KEY'; // Replace with your NewsAPI key
-const BASE_URL = 'https://newsapi.org/v2/top-headlines';
+const BASE_URL = '/api/news';
 
 // DOM Elements
 const newsContainer = document.getElementById('news-container');
@@ -61,8 +60,6 @@ async function getNews(category = '', searchTerm = '') {
     showLoading();
     
     const params = new URLSearchParams({
-      country: 'us',
-      apiKey: API_KEY,
       ...(category && { category }),
       ...(searchTerm && { q: searchTerm })
     });
